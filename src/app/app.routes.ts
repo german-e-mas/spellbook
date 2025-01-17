@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { SpellListComponent } from './spell-list/spell-list.component';
+import { SpellListComponent } from './spells/list/spell-list.component';
 
 export const routes: Routes = [
   {
@@ -10,14 +10,14 @@ export const routes: Routes = [
   {
     path: 'spellbook',
     loadComponent: () =>
-      import('./spellbook/spellbook.component').then(
+      import('./spells/spellbook/spellbook.component').then(
         (m) => m.SpellbookComponent,
       ),
   },
   {
     path: 'spell/:index',
     loadComponent: () =>
-      import('./spell-detail/spell-detail.component').then(
+      import('./spells/detail/spell-detail.component').then(
         (m) => m.SpellDetailComponent,
       ),
   },
