@@ -21,4 +21,5 @@ export const routes: Routes = [
         (m) => m.SpellDetailComponent,
       ),
   },
+  { path: '**', redirectTo: '' },
 ];
