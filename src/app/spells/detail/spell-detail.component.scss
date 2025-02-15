@@ -1,0 +1,23 @@
+.container {
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  flex-direction: column;
+  align-items: center;
+
+  mat-icon {
+    transform: scale(2);
+    color: var(--mat-sys-error);
+  }
+}
+
+mat-card {
+  margin: 2rem;
+}
+
+.footer {
+  padding: 1rem;
+}

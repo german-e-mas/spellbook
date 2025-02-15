@@ -1,1 +1,70 @@
-<p>spell-detail works!</p>
+@if (spellResource.isLoading()) {
+  <div class="container">
+    <mat-spinner></mat-spinner>
+  </div>
+}
+
+@if (spellResource.error()) {
+  <div class="container error">
+    <mat-icon>report_problem</mat-icon>
+    <p>The spell is not in our library</p>
+  </div>
+}
+
+@if (spellResource.value()) {
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{ spellResource.value()?.name }}</mat-card-title>
+      <mat-card-subtitle>
+        @switch (spellResource.value()?.level) {
+          @case (0) {
+            <span>Cantrip </span>
+          }
+          @case (1) {
+            <span>1st level </span>
+          }
+          @case (2) {
+            <span>2nd level </span>
+          }
+          @case (3) {
+            <span>3rd level </span>
+          }
+          @default {
+            <span>{{ spellResource.value()?.level }}th level </span>
+          }
+        }
+        <span>{{ spellResource.value()?.school?.name | lowercase }}</span>
+        @if (spellResource.value()?.ritual) {
+          <span> (ritual)</span>
+        }
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      @for (paragraph of spellResource.value()?.desc; track $index) {
+        <p>{{ paragraph }}</p>
+      }
+    </mat-card-content>
+
+    <mat-card-footer class="footer">
+      <mat-chip-set>
+        <mat-chip>{{ spellResource.value()?.range }}</mat-chip>
+        <mat-chip>{{ spellResource.value()?.duration }}</mat-chip>
+        @if (spellResource.value()?.concentration) {
+          <mat-chip>Concentration</mat-chip>
+        }
+        @if (spellResource.value()?.area_of_effect) {
+          <mat-chip
+            >{{ spellResource.value()?.area_of_effect?.type | titlecase }},
+            {{ spellResource.value()?.area_of_effect?.size }} feet</mat-chip
+          >
+        }
+        @if (spellResource.value()?.damage) {
+          <mat-chip>{{
+            spellResource.value()?.damage?.damage_type?.name
+          }}</mat-chip>
+        }
+      </mat-chip-set>
+    </mat-card-footer>
+  </mat-card>
+}
