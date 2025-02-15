@@ -49,7 +49,7 @@ export class AppComponent {
     },
   ]);
 
-  title = 'spellbook';
+  title = 'Dungeons and Dragons 5th Edition Spells';
 
   constructor() {
     this.router.events

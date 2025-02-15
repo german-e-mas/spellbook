@@ -48,12 +48,14 @@ export class SpellListComponent {
           this.spellList.set(spells);
         },
         error: (err) => {
-          this.snackbar.open('Error getting the list of spells');
+          this.snackbar.open('Error getting the list of spells', 'OK');
         },
       });
   }
 
   addToSpellbook(index: string) {
-    this.snackbar.open('Added to your spellbook');
+    this.snackbar.open('Added to your spellbook', 'OK', {
+      duration: 3000,
+    });
   }
 }

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { provideRouter } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
 import { SpellListComponent } from './spell-list.component';
@@ -9,13 +10,16 @@ import { APIReference } from '../types';
 describe('SpellListComponent', () => {
   let component: SpellListComponent;
   let fixture: ComponentFixture<SpellListComponent>;
-  const spellsServiceSpy = jasmine.createSpyObj('SpellsService', ['list']);
+  const spellsServiceSpy = jasmine.createSpyObj('SpellsService', {
+    list: of([]),
+  });
   const snackbarSpy = jasmine.createSpyObj('MatSbackbar', ['open']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SpellListComponent],
       providers: [
+        provideRouter([]),
         {
           provide: SpellsService,
           useValue: spellsServiceSpy,

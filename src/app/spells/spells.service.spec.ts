@@ -9,7 +9,7 @@ import { SpellsService } from './spells.service';
 import { APIReference, APIReferenceList, Spell } from './types';
 import { firstValueFrom } from 'rxjs';
 
-fdescribe('SpellsService', () => {
+describe('SpellsService', () => {
   let service: SpellsService;
   let http: HttpTestingController;
 
