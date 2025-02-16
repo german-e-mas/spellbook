@@ -9,6 +9,7 @@ import { finalize } from 'rxjs';
 
 import { APIReference } from '../types';
 import { SpellsService } from '../spells.service';
+import { SpellbookService } from '../spellbook/spellbook.service';
 
 @Component({
   selector: 'app-spell-list',
@@ -24,6 +25,7 @@ import { SpellsService } from '../spells.service';
 })
 export class SpellListComponent {
   private readonly spellsService = inject(SpellsService);
+  private readonly spellbookService = inject(SpellbookService);
   readonly snackbar = inject(MatSnackBar);
 
   readonly loading = signal<boolean>(true);
@@ -54,6 +56,7 @@ export class SpellListComponent {
   }
 
   addToSpellbook(index: string) {
+    this.spellbookService.add(index);
     this.snackbar.open('Added to your spellbook', 'OK', {
       duration: 3000,
     });

@@ -6,6 +6,7 @@ import { of, throwError } from 'rxjs';
 import { SpellListComponent } from './spell-list.component';
 import { SpellsService } from '../spells.service';
 import { APIReference } from '../types';
+import { SpellbookService } from '../spellbook/spellbook.service';
 
 describe('SpellListComponent', () => {
   let component: SpellListComponent;
@@ -13,7 +14,12 @@ describe('SpellListComponent', () => {
   const spellsServiceSpy = jasmine.createSpyObj('SpellsService', {
     list: of([]),
   });
-  const snackbarSpy = jasmine.createSpyObj('MatSbackbar', ['open']);
+  const spellbookServiceSpy = jasmine.createSpyObj(
+    'SpellbookService',
+    [],
+    ['add'],
+  );
+  const snackbarSpy = jasmine.createSpyObj('MatSnackbar', ['open']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -23,6 +29,10 @@ describe('SpellListComponent', () => {
         {
           provide: SpellsService,
           useValue: spellsServiceSpy,
+        },
+        {
+          provide: SpellbookService,
+          useValue: spellbookServiceSpy,
         },
         {
           provide: MatSnackBar,
