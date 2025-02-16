@@ -1,7 +1,13 @@
-import { Component, inject, resource, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  linkedSignal,
+  resource,
+  signal,
+} from '@angular/core';
 import { SpellbookService } from './spellbook.service';
 import { SpellsService } from '../spells.service';
-import { catchError, firstValueFrom, forkJoin, of, tap } from 'rxjs';
+import { firstValueFrom, forkJoin, of } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -24,44 +30,49 @@ export class SpellbookComponent {
   private readonly spellbookService = inject(SpellbookService);
   private readonly spellsService = inject(SpellsService);
 
+  /**
+   * Signal of spell indices. Obtained once upon creation.
+   */
   readonly indices = signal<string[]>([]);
+
+  /**
+   * Resource to handle the conversion between indices and actual spells.
+   */
   readonly spellsResource = resource({
     request: () => this.indices(),
     loader: async () =>
       await firstValueFrom(
         this.indices().length === 0
           ? of([])
-          : forkJoin(
-              this.indices().map((idx) => {
-                console.log('indices?', idx);
-                return this.spellsService.get(idx);
-              }),
-            ).pipe(
-              tap((val) => console.log(val)),
-              catchError((err) => {
-                console.log(err);
-                return of(null);
-              }),
-            ),
+          : forkJoin(this.indices().map((idx) => this.spellsService.get(idx))),
       ),
   });
+
+  /**
+   * Linked Signal to keep track of the spells without having to make
+   * a request each time the indices change.
+   */
+  readonly spells = linkedSignal(() => this.spellsResource.value());
 
   /**
    * Use the spell indices to get the whole spell.
    */
   constructor() {
-    this.refreshIndices();
+    this.indices.set(this.spellbookService.getSpells());
   }
 
   /**
    * Remove from the spellbook.
    */
   remove(index: string) {
-    this.spellbookService.remove(index);
-    this.refreshIndices();
-  }
+    this.spells.update((spells) => {
+      const spellIndex = spells?.findIndex((spell) => spell.index === index);
+      if (spellIndex) {
+        spells?.splice(spellIndex, 1);
+        this.spellbookService.remove(index);
+      }
 
-  refreshIndices() {
-    this.indices.set(this.spellbookService.getSpells());
+      return spells;
+    });
   }
 }
