@@ -67,7 +67,7 @@ export class SpellbookComponent {
   remove(index: string) {
     this.spells.update((spells) => {
       const spellIndex = spells?.findIndex((spell) => spell.index === index);
-      if (spellIndex) {
+      if (spellIndex !== undefined) {
         spells?.splice(spellIndex, 1);
         this.spellbookService.remove(index);
       }

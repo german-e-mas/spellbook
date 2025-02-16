@@ -32,7 +32,7 @@ export class SpellbookService {
    * Return all spell indices.
    */
   getSpells() {
-    return [...this.spells.values()];
+    return [...this.spells.values()].sort();
   }
 
   /**
