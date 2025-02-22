@@ -1,30 +1,46 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { RouterTestingHarness } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let routerHarness: RouterTestingHarness;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [provideRouter([])],
+      providers: [provideRouter([{ path: '**', component: AppComponent }])],
     }).compileComponents();
-  });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    routerHarness = await RouterTestingHarness.create('/');
   });
 
   it(`should render the title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
     const title = compiled.querySelector('mat-toolbar span')?.textContent;
 
-    expect(title).toEqual(app.title);
+    expect(title).toEqual(component.title);
+  });
+
+  it('should activate tabs when navigating', async () => {
+    const link = '/spellbook';
+
+    await routerHarness.navigateByUrl(link);
+
+    const tab = component.navigationTabs().find((tab) => tab.link === link);
+
+    const otherTabs = component
+      .navigationTabs()
+      .filter((tab) => tab.link !== link);
+
+    expect(tab?.active).toBeTrue();
+    otherTabs.forEach((tab) => expect(tab.active).toBeFalse());
   });
 });
