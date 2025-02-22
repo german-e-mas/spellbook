@@ -43,13 +43,13 @@ describe('SpellbookService', () => {
 
   it('should load the spells when created', () => {
     service = TestBed.inject(SpellbookService);
-    expect(service.getSpells()).toEqual(baseSpells);
+    expect(service.getSpells()).toEqual(baseSpells.sort());
   });
 
   it('should add a new spell', () => {
     service = TestBed.inject(SpellbookService);
     service.add('shield');
-    expect(service.getSpells()).toEqual([...baseSpells, 'shield']);
+    expect(service.getSpells()).toEqual([...baseSpells, 'shield'].sort());
   });
 
   it('should remove a spell', () => {
