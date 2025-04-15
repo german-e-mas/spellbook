@@ -1,9 +1,9 @@
 <mat-toolbar>
   <mat-icon>auto_awesome</mat-icon>
-  <span>{{ title }}</span>
+  <span data-cy="title">{{ title }}</span>
 </mat-toolbar>
 
-<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+<nav mat-tab-nav-bar [tabPanel]="tabPanel" data-cy="tabs">
   @for (tab of navigationTabs(); track tab) {
     <a mat-tab-link [active]="tab.active" [routerLink]="tab.link">
       <mat-icon>{{ tab.icon }}</mat-icon>

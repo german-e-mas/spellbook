@@ -4,7 +4,7 @@
   </div>
 } @else {
   <div class="list">
-    <mat-list role="list">
+    <mat-list role="list" data-cy="spell-list">
       @for (spell of spellList(); track spell; let last = $last) {
         <mat-list-item role="listitem">
           <div matListItemTitle>{{ spell.name }}</div>
