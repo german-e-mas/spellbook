@@ -42,4 +42,13 @@ describe('Spellbook', () => {
       .filter('mat-list-item')
       .should('have.length', 1);
   });
+
+  it('Should have the active spellbook tab', () => {
+    cy.visit('/spellbook');
+
+    cy.get('[data-cy="tabs"] a')
+      .filter('.mdc-tab--active')
+      .should('have.length', 1)
+      .contains('Spellbook');
+  });
 });

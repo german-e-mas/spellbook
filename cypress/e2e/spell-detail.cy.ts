@@ -8,6 +8,14 @@ describe('Spell Details', () => {
     cy.get('mat-card-footer').contains('Sphere, 20 feet');
   });
 
+  it('Should not have any active tabs on Spell Detail page', () => {
+    cy.visit('/spell/fireball');
+
+    cy.get('[data-cy="tabs"] a')
+      .filter('.mdc-tab--active')
+      .should('have.length', 0);
+  });
+
   it('Should show a warning if spell is not found', () => {
     cy.visit('/spell/bad-fireball');
 
