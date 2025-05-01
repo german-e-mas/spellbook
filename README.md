@@ -1,59 +1,36 @@
-# Spellbook
+# Spellbook for Dungeons and Dragons 5E
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.7.
+## Background
 
-## Development server
+The back of my D&D character sheets usually look like a long list of random notes about everything. My inventory also is full of baubles, trinkets and assorted garbage, like a late-game graphic adventure. Nowadays I am playing a Wizard, and since I have to keep track of my known spells, I ran out of space quickly.
 
-To start a local development server, run:
+There are tons of apps out there to track your spells and slots, but why not invent another wheel and build my own?
 
-```bash
-ng serve
-```
+This is a fun personal project to try different technologies and features, such as:
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Use [D&D 5e API](https://www.dnd5eapi.co/).
+- Angular 19 [resources](https://angular.dev/api/core/Resource) and elements of the [new control flow](https://angular.dev/guide/templates/control-flow).
+- Unit and Integration tests with Angular's [default testing configuration](https://angular.dev/guide/testing), which involves Karma and Jasmine.
+- E2E tests with [Cypress](https://www.cypress.io/).
+- Try some BDD with [Cucumber](https://cucumber.io/) using [@badeball/cypress-cucumber-preprocessor](https://github.com/badeball/cypress-cucumber-preprocessor)
 
-## Code scaffolding
+## Running the app
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. Clone this repository and `cd` into it.
+2. Make sure you have [Node v22](https://nodejs.org/) installed.
+3. Run: `npm install`
+4. Run: `npm start`
 
-```bash
-ng generate component component-name
-```
+## Running tests
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+For unit and integration tests, which run using the Angular CLI, run `npm run test`.
 
-```bash
-ng generate --help
-```
+For E2E tests, run `npm run cypress:run`.
 
-## Building
+You can also run `npm run e2e` or `npm run cypress:open` to open Cypress and run specs manually, which is helpful for debugging the tests.
 
-To build the project run:
+## Notes
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Spells are stored in the Local Storage simply because I didn't want to deal with a database for this project.
+- I believe the API doesn't support pagination so the first list spells is quite large.
+- It would be nice to filter by class, school and level. The list contains Druid spells for example. Ew.
