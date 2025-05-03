@@ -1,5 +1,9 @@
 # Spellbook for Dungeons and Dragons 5E
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/1179fd87-d655-45a4-965e-c2684fab73ff" alt="Spellbook demo" />
+</p>
+
 ## Try it yourself!
 
 > [!TIP]
