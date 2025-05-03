@@ -1,5 +1,10 @@
 # Spellbook for Dungeons and Dragons 5E
 
+## Try it yourself!
+
+> [!TIP]
+> The app is deployed to Github pages. You can access it [here](https://german-e-mas.github.io/spellbook/).
+
 ## Background
 
 The back of my D&D character sheets usually look like a long list of random notes about everything. My inventory also is full of baubles, trinkets and assorted garbage, like a late-game graphic adventure. Nowadays I am playing a Wizard, and since I have to keep track of my known spells, I ran out of space quickly.
@@ -14,7 +19,7 @@ This is a fun personal project to try different technologies and features, such 
 - E2E tests with [Cypress](https://www.cypress.io/).
 - Try some BDD with [Cucumber](https://cucumber.io/) using [@badeball/cypress-cucumber-preprocessor](https://github.com/badeball/cypress-cucumber-preprocessor)
 
-## Running the app
+## Running the app locally
 
 1. Clone this repository and `cd` into it.
 2. Make sure you have [Node v22](https://nodejs.org/) installed.
@@ -28,6 +33,15 @@ For unit and integration tests, which run using the Angular CLI, run `npm run te
 For E2E tests, run `npm run cypress:run`.
 
 You can also run `npm run e2e` or `npm run cypress:open` to open Cypress and run specs manually, which is helpful for debugging the tests.
+
+## Deployment
+
+This app is deployed to Github pages. That can be done by manually uploading the build artifacts to a branch and have Github deploy from there, but I'm using [angular-cli-ghpages](https://www.npmjs.com/package/angular-cli-ghpages), which is the preferred way to do so according to [Angular's Deployment documentation](https://angular.dev/tools/cli/deployment#automatic-deployment-with-the-cli).
+
+Once everything is in place, you can deploy by running `ng deploy --base-href=/spellbook/`.
+
+> [!NOTE]
+> The `/` surrounding the repository name are important!
 
 ## Notes
 
